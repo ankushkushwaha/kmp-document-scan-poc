@@ -2,10 +2,7 @@ package com.solera.poc
 import platform.VisionKit.*
 import platform.Foundation.NSError
 import platform.UIKit.*
-import  platform.Foundation.*
 import platform.darwin.NSObject
-import platform.UIKit.UIImage
-import platform.darwin.*
 
 actual class DocumentScanner  {
     private val controller = DocumentScannerDelegate()
@@ -18,7 +15,8 @@ actual class DocumentScanner  {
 }
 
 class DocumentScannerDelegate : NSObject(), VNDocumentCameraViewControllerDelegateProtocol {
-    private val viewController = VNDocumentCameraViewController()
+    private var viewController: VNDocumentCameraViewController? = null
+
     var resultCallback: ((List<String>) -> Unit)? = null
 
     override fun documentCameraViewController(
@@ -39,29 +37,30 @@ class DocumentScannerDelegate : NSObject(), VNDocumentCameraViewControllerDelega
         resultCallback?.invoke(imagePaths)
 
         println("Document scan completed with ${didFinishWithScan.pageCount} pages")
-        viewController.dismissModalViewControllerAnimated(true)
+        viewController?.dismissModalViewControllerAnimated(true)
     }
 
     override fun documentCameraViewControllerDidCancel(controller: VNDocumentCameraViewController) {
-        // Handle cancellation
         println("Document scan cancelled")
+        viewController?.dismissModalViewControllerAnimated(true)
     }
 
     override fun documentCameraViewController(
         controller: VNDocumentCameraViewController,
         didFailWithError: NSError
     ) {
-        // Handle error
         println("Document scan failed: ${didFailWithError.localizedDescription}")
+        viewController?.dismissModalViewControllerAnimated(true)
     }
 
     fun openDocumentScanner(resultCallback: (List<String>) -> Unit) {
-        viewController.delegate = this
+
+        viewController = VNDocumentCameraViewController()
+        viewController?.delegate = this
+
         this.resultCallback = resultCallback
 
-        // Get the root view controller and present the document scanner
-
         val rootViewController = UIApplication.sharedApplication.keyWindow?.rootViewController
-        rootViewController?.presentViewController(viewController, animated = true, completion = null)
+        rootViewController?.presentViewController(viewController!!, animated = true, completion = null)
     }
 }
