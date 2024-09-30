@@ -1,10 +1,7 @@
 package com.solera.poc
 
-class AndroidScanner: ScannerInterface {
-    override fun startScanning() {
-        print("startScanning Android")
+actual class DocumentScanner {
+    actual fun startScanning(onResult: (List<String>) -> Unit) {
+
     }
 }
-
-actual fun getScanner(): ScannerInterface = AndroidScanner()
-
