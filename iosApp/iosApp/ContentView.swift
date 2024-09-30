@@ -3,13 +3,14 @@ import Shared
 
 struct ContentView: View {
     @State private var showContent = false
+    @State var manager = ScanManager()
     var body: some View {
         VStack {
 
             Spacer()
             
             Button("Open Camera") {
-                ScanManager().startScanning()
+                manager.startScanning()
             }
             
             Spacer()
