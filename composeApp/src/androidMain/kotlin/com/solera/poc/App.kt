@@ -25,7 +25,9 @@ fun App() {
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
 
             Button(onClick = {
-                ScanManager().startScanning()
+                DocumentScanner().startScanning { it ->
+                    println(it)
+                }
             }) {
                 Text("Open Scan")
             }
