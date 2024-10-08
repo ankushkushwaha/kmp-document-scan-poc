@@ -22,6 +22,9 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation ("com.google.android.gms:play-services-mlkit-document-scanner:16.0.0-beta1")
+            implementation ("io.coil-kt:coil-compose:2.2.2")
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)

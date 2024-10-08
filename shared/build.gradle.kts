@@ -26,6 +26,9 @@ kotlin {
     }
     
     sourceSets {
+        androidMain.dependencies {
+            implementation ("com.google.android.gms:play-services-mlkit-document-scanner:16.0.0-beta1")
+        }
         commonMain.dependencies {
             // put your Multiplatform dependencies here
         }
