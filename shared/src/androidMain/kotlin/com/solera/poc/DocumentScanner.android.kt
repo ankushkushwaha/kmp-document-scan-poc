@@ -1,9 +1,15 @@
 package com.solera.poc
 
 actual class DocumentScanner {
-    actual fun startScanning(resultCallback: (List<String>) -> Unit) {
+    actual fun startScanning(resultCallback: (ScanResult) -> Unit) {
+        println("Android missing this feature: startScanning")
+        resultCallback(ScanResult())
+    }
+}
 
-        println("Android missing this feature")
-        resultCallback(listOf())
+actual class FileSystem {
+    actual fun saveImage(filename : String,bytes : ByteArray) : String {
+        println("Android missing this feature: saveImage")
+        return ""
     }
 }

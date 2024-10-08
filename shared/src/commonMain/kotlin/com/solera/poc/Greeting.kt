@@ -9,3 +9,18 @@ class Greeting {
 }
 
 
+
+//class xyz {
+//
+//    fun startScan () {
+//        commonMain.startScan()
+//    }
+//
+//    fun upload (byteArray): result {
+//
+//        APIManager().upload(path)
+//    }
+//
+//}
+
+
